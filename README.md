@@ -1,6 +1,6 @@
 ![image](https://github.com/ergv03/chat-with-pdf-llm/assets/23053920/a4160a7a-87de-43ef-a672-e946b1083840)
 
-Simple web-based chat app, built using Streamlit.
+Simple web-based chat app, built using [Streamlit](https://streamlit.io/) and [Langchain](https://python.langchain.com/).
 
 Allows the user to provide a list of PDFs, and ask questions to a LLM (today only OpenAI GPT is implemented) that can be answered by these PDF documents.
 
@@ -16,7 +16,7 @@ Run ```streamlit run chat_app.py``` in your terminal.
 
 Add the URLs of the PDF documents that are relevant to your queries, and start chatting with the bot. 
 
-## Details:
+## Overview:
 
 The provided PDFs will be downloaded and properly split into chunks, and finally embedding vectors for each chunk will be generated using OpenAI service. These vectors are then indexed using FAISS, and can be quickly retrieved.
 
