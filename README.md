@@ -1,4 +1,5 @@
-![image](https://github.com/ergv03/chat-with-pdf-llm/assets/23053920/a4160a7a-87de-43ef-a672-e946b1083840)
+
+![image](https://github.com/ergv03/chat-with-pdf-llm/assets/23053920/969edf03-4451-4909-98d9-601d92a17e83)
 
 Simple web-based chat app, built using [Streamlit](https://streamlit.io/) and [Langchain](https://python.langchain.com/).
 
