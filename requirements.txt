@@ -3,3 +3,4 @@ langchain==0.0.248
 openai==0.27.7
 streamlit==1.25.0
 pypdfium2==4.18.0
+tiktoken==0.4.0
