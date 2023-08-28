@@ -10,8 +10,8 @@ gpt_max_tokens = 1000
 search_number_messages = 4
 
 # PDF Chunking constants
-chunk_size = 500
-chunk_overlap = 50
+chunk_size = 2000
+chunk_overlap = 100
 
 # Number of snippets to be retrieved by FAISS
 number_snippets_to_retrieve = 3

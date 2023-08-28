@@ -102,10 +102,13 @@ if query_text := st.chat_input("Your message"):
         st.markdown(response)
         snippet_memory = conversation.memory.memories[1]
         for page_number, snippet in zip(snippet_memory.pages, snippet_memory.snippets):
-            with st.expander(f'Snippet from page {page_number + 1}'):
+            snippet_header = f'Relevant snippet from PDF (page {page_number + 1})' if page_number != -1 else "Relevant Snippet"
+            with st.expander(snippet_header):
                 # Remove the <START> and <END> tags from the snippets before displaying them
                 snippet = re.sub("<START_SNIPPET_PAGE_\d+>", '', snippet)
                 snippet = re.sub("<END_SNIPPET_PAGE_\d+>", '', snippet)
+                snippet = re.sub("<START_SNIPPET_FROM_HTML_DOC>", '', snippet)
+                snippet = re.sub("<END_SNIPPET_FROM_HTML_DOC>", '', snippet)
                 st.markdown(snippet)
 
     # Add assistant response to chat history

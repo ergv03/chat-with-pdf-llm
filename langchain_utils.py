@@ -36,7 +36,6 @@ class SnippetsBufferWindowMemory(ConversationBufferWindowMemory):
         self.pages = [page for page in reversed(self.pages)]
 
         for snippet in similar_snippets:
-            page_number = snippet.metadata['page']
             # Load into memory only new snippets
             snippet_to_add = f"The following snippet was extracted from the following document: "
             if snippet.metadata['title'] == snippet.metadata['source']:
@@ -44,9 +43,22 @@ class SnippetsBufferWindowMemory(ConversationBufferWindowMemory):
             else:
                 snippet_to_add += f"[{snippet.metadata['title']}]({snippet.metadata['source']})\n"
 
-            snippet_to_add += f"<START_SNIPPET_PAGE_{page_number + 1}>\n"
+            if snippet.metadata['doc_type'] == 'pdf':
+                # For PDF snippets, include the page from where the snippet was extracted from. This will allow the LLM
+                # to include in the response the exact page the answer is coming from 
+                page_number = snippet.metadata['page']
+                prefix_snippet = f"<START_SNIPPET_PAGE_{page_number + 1}>\n"
+                suffix_snippet = f"<END_SNIPPET_PAGE_{page_number + 1}>\n"
+            else:
+                # HTML documents don't have pages per se, so define page number as -1
+                page_number = -1
+                prefix_snippet = f"<START_SNIPPET_FROM_HTML_DOC>\n"
+                suffix_snippet = f"<END_SNIPPET_FROM_HTML_DOC>>\n"
+            
+            snippet_to_add += prefix_snippet
             snippet_to_add += f"{snippet.page_content}\n"
-            snippet_to_add += f"<END_SNIPPET_PAGE_{page_number + 1}>\n"
+            snippet_to_add += suffix_snippet
+            
             if snippet_to_add not in self.snippets:
                 self.pages.append(page_number)
                 self.snippets.append(snippet_to_add)
