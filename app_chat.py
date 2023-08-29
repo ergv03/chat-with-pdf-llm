@@ -38,13 +38,12 @@ if "messages" not in st.session_state:
 if 'urls' not in st.session_state:
     st.session_state.urls = []
 
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+
 with st.sidebar:
-
-    openai_api_key = st.text_input('Step 1 - OpenAI API Key:', type='password')
-
     # Add/Remove URLs form
     with st.form('urls-form', clear_on_submit=True):
-        url = st.text_input('Step 2 - URLs to relevant PDFs: ')
+        url = st.text_input('URLs to relevant websites and PDFs: ')
         add_url_button = st.form_submit_button('Add')
         if add_url_button:
             if url not in st.session_state.urls:
@@ -66,8 +65,6 @@ for message in st.session_state.messages:
 
 # React to user input
 if query_text := st.chat_input("Your message"):
-
-    os.environ['OPENAI_API_KEY'] = openai_api_key
 
     # Display user message in chat message container, and append to session state
     st.chat_message("user").markdown(query_text)
