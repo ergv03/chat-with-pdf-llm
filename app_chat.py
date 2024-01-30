@@ -15,8 +15,8 @@ def remove_url(url_to_remove):
 
 
 # Page title
-st.set_page_config(page_title='Talk with PDFs using LLMs - Beta')
-st.title('Talk with PDFs using LLMs - (Beta)')
+st.set_page_config(page_title='Talk with PDFs using LLMs - Alpha')
+st.title('Talk with PDFs using LLMs - (Alpha)')
 
 # Initialize the faiss_index key in the session state. This can be used to avoid having to download and embed the same PDF
 # every time the user asks a question
